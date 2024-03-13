@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import {MatIconModule} from '@angular/material/icon'
-
+import {Router} from '@angular/router'
 @Component({
   selector: 'app-side-nav',
   standalone: true,
@@ -9,5 +9,22 @@ import {MatIconModule} from '@angular/material/icon'
   styleUrl: './side-nav.component.css'
 })
 export class SideNavComponent {
+  isSlideOut = true
 
+  constructor(private router : Router){}
+  toggleSideout():void{
+    this.isSlideOut = !this.isSlideOut;
+  }
+  onDash(){
+    this.router.navigate(['/budget-planner/dashboard'])
+  }
+  onProfile(){
+    this.router.navigate(['/budget-planner/profile'])
+  }
+  onPrev(){
+    this.router.navigate(['/budget-planner/history'])
+  }
+  onLogout(){
+    this.router.navigate(['/budget-planner/login'])
+  }
 }

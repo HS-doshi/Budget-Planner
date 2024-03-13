@@ -1,3 +1,17 @@
 <div class="navbar">
   <h2>Code Fashion Hub</h2>
 </div>
+<div>
+    <div class="toggle-button-row" (click)="toggleSideout()">
+      <mat-icon>menu</mat-icon>
+    </div>
+</div>
+<div class="slide-out-panel" [class.slide-out]="isSlideOut">
+  <div class="slide-out-content">
+    <h3 class="nav">Budget Planner</h3>
+    <p class="edit-col" (click)="onDash()">Dashboard</p>
+    <p class="edit-col" (click)="onProfile()">Profile</p>
+    <p class="edit-col" (click)="onPrev()">Prev History</p>
+    <p class="edit-col" (click)="onLogout()">Log Out</p>
+  </div>
+</div>
