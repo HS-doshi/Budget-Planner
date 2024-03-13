@@ -38,3 +38,17 @@
   border-radius:50%;
   margin-right:15px;
 }
+.button{
+  position:absolute;
+  bottom:20px;
+  right:20px;
+  padding:10px 20px;
+  border:none;
+  color:white;
+  border-radius:4px;
+  cursor:pointer;
+  background: linear-gradient(135deg, #008080, #80ced6);
+}
+.button:hover{
+  background:#67bbc6;
+}
