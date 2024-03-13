@@ -30,7 +30,12 @@ export class LoginComponent implements OnInit {
     });
   }
   toggleForm(form:'login'|'register'){
-    this.activeForm = form;
+    if(form === 'login'){
+      this.activeForm = form;
+    }
+    else{
+      this.activeForm = form;
+    }
   }
   login():any{
     if(this.loginForm.valid){
@@ -44,12 +49,11 @@ export class LoginComponent implements OnInit {
   }
   register():any{
     if(this.registerForm.valid){
-      console.log('Register : ',this.registerForm.value),
-      this.snackbar.open('Successfullt Registered!!')
+      console.log('Register : ',this.registerForm.value)
       this.router.navigate(['/budget-planner/login'])
     }
     else{
-      this.snackbar.open('Invaid email or password!' , 'close',{duration:2000});
+      this.snackbar.open('Please fill all fields correctly!' , 'Close',{duration:2000});
     }
   }
 }
