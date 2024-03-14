@@ -19,6 +19,13 @@
           Total income For {{selectedMonth}} : ${{calculatetotalMonth(selectedMonth)}}
       </div>
       <div class="form-group">
+        <label for="">Investments</label>
+        <select formControlName="investments" id="investments" class="form-control" (change)="onChange($event)">
+          <option value="" disabled>Select Month</option>
+          <option value="Salary">Salary</option>
+          <option value="Stokes">Stokes</option>
+          <option value="IPO">IPO</option>
+        </select>
       </div>
       <div class="form-group">
       </div>

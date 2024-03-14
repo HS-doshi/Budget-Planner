@@ -44,11 +44,11 @@ export class IncomeComponent implements OnInit {
 
   }
   calculatetotalMonth(month:string):number{
-    let totalAmount=0 ;
+    let totalIncome=0 ;
     for(const income of this.getIncomeForMonth(month)){
-      totalAmount+=income.amount;
+      totalIncome+=income.amount;
     }
-    return totalAmount;
+    return totalIncome;
   }
   getIncomeForMonth(month: string):any[]{
     switch(month){
