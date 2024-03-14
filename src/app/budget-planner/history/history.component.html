@@ -1,10 +1,10 @@
 <div class="navbar">
-  <h2>TODO</h2>
+  <h2>Code Fashion Hub</h2>
 </div>
 <div class="main-container">
   <div class="container">
-    <h2>Todo-List</h2>
-    <form [formGroup]="todoForm" (ngSubmit)="onSubmitTodo()" class="input-form">
+    <h2>Transation History</h2>
+    <form [formGroup]="historyForm"  class="input-form">
       <div class="form-group">
         <select formControlName="month" id="month" class="form-control" (change)="onChangeTodo($event)">
           <option value="" disabled>Select Month</option>
@@ -16,24 +16,11 @@
       <div class="form-group">
       </div>
       <div class="total-income">
-          Total Todo For {{selectedMonth}} : {{calculatetotalTodo(selectedMonth) | currency : 'INR' : true:'2.0' }}
+          Transation For {{selectedMonth}} : {{calculatetotalTodo(selectedMonth) | currency : 'INR' : true:'2.0' }}
       </div>
-      <div class="form-group">
-        <label for="transationType">Transation Type :</label>
-        <input type="text" formControlName="transationType" id="transationType" class="form-control"
-        placeholder="Enter Transation type" [class.disabled-dropdown]="!monthSelected">
-      </div>
-      <div class="form-group">
-        <label for="todoAmount">Amount :</label>
-        <input type="number" formControlName="todoAmount" id="todoAmount" class="form-control"
-        placeholder="Enter Amount" [class.disabled-dropdown]="!monthSelected">
-      </div>
-      <button type="submit" class="btn btn-primary" (click)="onSubmitTodo()"
-      [class.disabled-dropdown]="!monthSelected">Add Expense</button>
     </form>
-
     <hr>
-    <h3>Expense List : {{selectedMonth}}</h3>
+    <h3>Transation List : {{selectedMonth}}</h3>
     <table class="table">
       <thead>
         <tr>
@@ -52,7 +39,6 @@
       <button type="button" class="btn btn-primary" (click)="onBack()">Back</button>
       <div class="form-group">
       </div>
-      <button type="button" class="btn btn-primary" (click)="saveForm()">Save</button>
     </div>
   </div>
 </div>

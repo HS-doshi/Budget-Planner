@@ -6,6 +6,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { IncomeComponent } from './income/income.component';
 import { ExpenseComponent } from './expense/expense.component';
 import { ToDoComponent } from './to-do/to-do.component';
+import { HistoryComponent } from './history/history.component';
 
 const routes: Routes = [
   // {path:'',redirectTo:'/login',pathMatch:'full'},
@@ -14,7 +15,8 @@ const routes: Routes = [
   { path: 'dashboard' , component : DashboardComponent},
   { path: 'income', component :IncomeComponent},
   { path: 'expense' , component : ExpenseComponent},
-  { path: 'todo' , component:ToDoComponent}
+  { path: 'todo' , component:ToDoComponent},
+  { path: 'history' , component : HistoryComponent}
 ];
 
 @NgModule({
