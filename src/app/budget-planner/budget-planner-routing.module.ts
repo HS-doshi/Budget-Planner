@@ -5,6 +5,7 @@ import { SideNavComponent } from './side-nav/side-nav.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { IncomeComponent } from './income/income.component';
 import { ExpenseComponent } from './expense/expense.component';
+import { ToDoComponent } from './to-do/to-do.component';
 
 const routes: Routes = [
   // {path:'',redirectTo:'/login',pathMatch:'full'},
@@ -12,7 +13,8 @@ const routes: Routes = [
   { path: 'side-nav' , component:SideNavComponent},
   { path: 'dashboard' , component : DashboardComponent},
   { path: 'income', component :IncomeComponent},
-  { path: 'expense' , component : ExpenseComponent}
+  { path: 'expense' , component : ExpenseComponent},
+  { path: 'todo' , component:ToDoComponent}
 ];
 
 @NgModule({
