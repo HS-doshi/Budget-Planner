@@ -43,3 +43,55 @@
   transition : border-color 0.3s ease;
   font-size : 16px;
 }
+
+.input-form .form-control:focus {
+  background: #bfe0e4;
+  outline: none;
+}
+.btn-primary{
+  background: linear-gradient(135deg, #008080, #80ced6);
+  color:#ffffff;
+  padding:12px 24px;
+  border:none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  font-size: 16px;
+}
+
+.btn-primary:hover {
+  background: #80ced6;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+}
+.table th,
+.table td{
+  padding: 12px;
+  border: 1px solid #dee2e6;
+  text-align: left;
+}
+.table th {
+    background-color: #f2f2f2;
+    font-weight: bold;
+}
+.table tbody tr:nth-child(even) {
+  background-color: #f8f9fa;
+}
+.table tbody tr:hover {
+  background-color: #e2e6ea;
+}
+.total-income{
+  background-color: #f2f9ff;
+  padding: 15px;
+  margin-bottom: 20px;
+  border-radius: 6px;
+}
+.disabled-dropdown {
+  color: #6c757d;
+  background-color: #e9ecef;
+  pointer-events: none;
+}

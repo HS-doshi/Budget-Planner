@@ -2,6 +2,8 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatOptionModule, MatOptionSelectionChange } from '@angular/material/core';
+import { Router } from '@angular/router';
+import { runInThisContext } from 'vm';
 
 @Component({
   selector: 'app-income',
@@ -15,23 +17,27 @@ export class IncomeComponent implements OnInit {
   incomeForm :any;
   selectedMonth : any;
 
-  JanuaryIncome : any[] =[
-    {source: 'Salary', amount : 7000, investment : '10000'},
-    {source: 'Stock', amount : 3000, investment : '15000'}
-  ];
-  FebruaryIncome : any[] =[
-    {source: 'Salary', amount : 6900, investment : '3000'},
-    {source: 'Stock', amount : 3000, investment : '14000'}
-  ];
-  MarchIncome : any[] =[
-    {source: 'Salary', amount : 7000, investment : '10000'},
-    {source: 'Stock', amount : 3000, investment : '15000'},
-    {source: 'IPO', amount : 5000, investment : '15000'},
-  ];
-  constructor(private fb : FormBuilder){
+  constructor(private fb : FormBuilder,
+    private router :Router){
     const currentDate = new Date();
     this.selectedMonth = currentDate.toLocaleString('default',{month : 'long'})
   }
+
+  JanuaryIncome : any[] =[
+    {source: 'Salary', amount : 7000, investments : 'Salary'},
+    {source: 'Stock', amount : 3000, investments : 'Stock'}
+  ];
+  FebruaryIncome : any[] =[
+    {source: 'Salary', amount : 6900, investments : 'Salary'},
+    {source: 'Stock', amount : 3000, investments : 'Stock'}
+  ];
+  MarchIncome : any[] =[
+    {source: 'Salary', amount : 7000, investments : 'Salary'},
+    {source: 'Stock', amount : 3000, investments : 'Stock'},
+    {source: 'IPO', amount : 5000, investments : 'IPO'},
+  ];
+
+  monthSelected : boolean = false;
   ngOnInit ():void{
     this.incomeForm = this.fb.group({
       month : ['',Validators.required],
@@ -41,7 +47,24 @@ export class IncomeComponent implements OnInit {
     })
   }
   onSubmit(){
-
+    if(this.incomeForm.valid){
+      const newIncome = this.incomeForm.value;
+      switch(this.selectedMonth){
+        case 'January':
+          this.JanuaryIncome.push(newIncome);
+          break;
+        case 'February':
+          this.FebruaryIncome.push(newIncome);
+          break;
+        case 'March':
+          this.MarchIncome.push(newIncome);
+          break;
+        default:
+          break;
+      }
+      // this.incomeForm.reset('');
+      this.incomeForm.patchValue({month :'',source:'',amount:'',investments :''})
+    }
   }
   calculatetotalMonth(month:string):number{
     let totalIncome=0 ;
@@ -64,6 +87,7 @@ export class IncomeComponent implements OnInit {
   }
   onChange(event:any){
     this.selectedMonth = event.target.value;
+    this.monthSelected = true;
     this.getFilteredIncome();
   }
   getFilteredIncome(){
@@ -82,5 +106,12 @@ export class IncomeComponent implements OnInit {
         break;
     }
     return filteredIncomes;
+  }
+  onBack(){
+    this.router.navigate(["/budget-planner/dashboard"])
+  }
+  saveForm(){
+    alert('Form saved!');
+
   }
 }
