@@ -2,11 +2,12 @@ import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { SideNavComponent } from '../side-nav/side-nav.component';
 
 @Component({
   selector: 'app-history',
   standalone: true,
-  imports: [ReactiveFormsModule, CommonModule],
+  imports: [ReactiveFormsModule, CommonModule , SideNavComponent],
   templateUrl: './history.component.html',
   styleUrl: './history.component.css'
 })
@@ -88,5 +89,6 @@ export class HistoryComponent {
     onBack(){
       this.router.navigate(["/budget-planner/dashboard"])
     }
+    
 
   }
