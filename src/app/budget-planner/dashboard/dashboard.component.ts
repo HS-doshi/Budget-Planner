@@ -37,8 +37,8 @@ export class DashboardComponent {
     onExpense(){
       this.router.navigate(['/budget-planner/expense'])
     }
-    onTotal(){
-      this.router.navigate(['/budget-planner/total'])
+    get currentMonthSavings(): number {
+      return this.totalCurrentMonthIncome - this.totalCurrentMonthExpense;
     }
 
 }

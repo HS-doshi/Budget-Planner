@@ -39,8 +39,8 @@ export class LoginComponent implements OnInit {
   }
   login():any{
     if(this.loginForm.valid){
-      console.log('Login : ',this.loginForm.value),
-      this.router.navigate(['/budget-planner'])
+      this.router.navigate(['/budget-planner/dashboard']),
+      console.log('Login : ',this.loginForm.value)
     }
     else{
       this.snackbar.open('Invalid email or password', 'Close' , {duration:3000})

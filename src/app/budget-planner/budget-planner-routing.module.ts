@@ -10,8 +10,7 @@ import { HistoryComponent } from './history/history.component';
 import { ProfileComponent } from './profile/profile.component';
 
 const routes: Routes = [
-  // {path:'',redirectTo:'/login',pathMatch:'full'},
-  { path: 'budget-planner' , redirectTo:'/login' , pathMatch:'full'},
+  { path: '', redirectTo:'login',pathMatch:'full'},
   { path: 'login', component:LoginComponent},
   { path: 'side-nav' , component:SideNavComponent},
   { path: 'dashboard' , component : DashboardComponent},
