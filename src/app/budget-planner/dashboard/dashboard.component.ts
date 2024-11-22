@@ -1,44 +1,50 @@
 import { Component } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
-import {SideNavComponent} from '../side-nav/side-nav.component'
-import {FormsModule} from '@angular/forms'
-import {CommonModule} from '@angular/common'
+import { SideNavComponent } from '../side-nav/side-nav.component';
+import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
+import { AuthService } from '../auth-service';
 @Component({
   selector: 'app-dashboard',
   standalone: true,
-  imports: [MatIconModule , SideNavComponent ,FormsModule , CommonModule],
+  imports: [MatIconModule, SideNavComponent, FormsModule, CommonModule],
   templateUrl: './dashboard.component.html',
-  styleUrl: './dashboard.component.css'
+  styleUrl: './dashboard.component.css',
 })
 export class DashboardComponent {
+  constructor(private authService: AuthService, private router: Router) {}
 
-    constructor(private router : Router){}
+  logout() {
+    this.authService.logout();
+    this.router.navigate(['/budget-planner/login']);
+  }
 
-    lastMonthIncome = ['January: 10000','February : 15000','March: 16000'];
-    currentMonthIncome = '45000'
+  lastMonthIncome = ['January: 10000', 'February : 15000', 'March: 16000'];
+  currentMonthIncome = '45000';
 
-    lastMonthExpense = ['January : 13000','February:13500' , 'March:14000']
-    currentMonthExpense= '2000'
+  lastMonthExpense = ['January : 13000', 'February:13500', 'March:14000'];
+  currentMonthExpense = '2000';
 
-    toDoList = ['Pay Electricity Bill',
-                'Submit Monthly Report',
-                'Buy Groceries',
-                'Call insurance company']
-    totalCurrentMonthIncome = 50000;
-    totalCurrentMonthExpense = 14000;
+  toDoList = [
+    'Pay Electricity Bill',
+    'Submit Monthly Report',
+    'Buy Groceries',
+    'Call insurance company',
+  ];
+  totalCurrentMonthIncome = 50000;
+  totalCurrentMonthExpense = 14000;
 
-    onIncome(){
-      this.router.navigate(['/budget-planner/income'])
-    }
-    onTodo(){
-      this.router.navigate(['/budget-planner/todo'])
-    }
-    onExpense(){
-      this.router.navigate(['/budget-planner/expense'])
-    }
-    get currentMonthSavings(): number {
-      return this.totalCurrentMonthIncome - this.totalCurrentMonthExpense;
-    }
-
+  onIncome() {
+    this.router.navigate(['/budget-planner/income']);
+  }
+  onTodo() {
+    this.router.navigate(['/budget-planner/todo']);
+  }
+  onExpense() {
+    this.router.navigate(['/budget-planner/expense']);
+  }
+  get currentMonthSavings(): number {
+    return this.totalCurrentMonthIncome - this.totalCurrentMonthExpense;
+  }
 }

@@ -1,59 +1,89 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import {FormBuilder, FormsModule, ReactiveFormsModule, Validators} from '@angular/forms'
+import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
+import { AuthService } from '../auth-service';
+import * as CryptoJS from 'crypto-js';
+
 @Component({
   selector: 'app-login',
   standalone: true,
   imports: [ReactiveFormsModule, CommonModule],
   templateUrl: './login.component.html',
-  styleUrl: './login.component.css'
+  styleUrls: ['./login.component.css'], // Fixed typo (styleUrl -> styleUrls)
 })
 export class LoginComponent implements OnInit {
+  loginForm: any;
+  registerForm: any;
+  activeForm: 'login' | 'register' = 'login';
 
-  loginForm  :any;
-  registerForm : any;
-  activeForm : 'login'| 'register' ='login'
-
-  constructor(private fb : FormBuilder , private router : Router,private snackbar:MatSnackBar){}
+  constructor(
+    private authService: AuthService,
+    private fb: FormBuilder,
+    private router: Router,
+    private snackbar: MatSnackBar
+  ) {}
 
   ngOnInit() {
     this.loginForm = this.fb.group({
-      email : ['',[Validators.required, Validators.email]],
-      password : ['',Validators.required]
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', Validators.required],
     });
     this.registerForm = this.fb.group({
-      username : ['',Validators.required],
-      email : ['',[Validators.required, Validators.email]],
-      password : ['',Validators.required]
+      username: ['', Validators.required],
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', Validators.required],
     });
   }
-  toggleForm(form:'login'|'register'){
-    if(form === 'login'){
-      this.activeForm = form;
-    }
-    else{
-      this.activeForm = form;
+
+  toggleForm(form: 'login' | 'register') {
+    this.activeForm = form;
+  }
+
+  login(): any {
+    if (this.loginForm.valid) {
+      const email = this.loginForm.value.email;
+      const password = this.loginForm.value.password;
+
+      const encryptedPassword = CryptoJS.SHA256(password).toString();
+
+      localStorage.setItem('password', encryptedPassword);
+
+      const role = email === 'admin@example.com' ? 'admin' : 'user';
+      this.authService.login(role);
+
+      // Navigate based on role
+      if (role === 'admin') {
+        this.router.navigate(['/budget-planner/admin-dashboard']);
+      } else {
+        this.router.navigate(['/budget-planner/dashboard']);
+      }
+
+      this.snackbar.open('Login successful!', 'Close', {
+        duration: 3000,
+        panelClass: ['success-snackbar'],
+      });
+    } else {
+      this.snackbar.open('Invalid email or password', 'Close', {
+        duration: 3000,
+        panelClass: ['error-snackbar'],
+      });
     }
   }
-  login():any{
-    if(this.loginForm.valid){
-      this.router.navigate(['/budget-planner/dashboard']),
-      console.log('Login : ',this.loginForm.value)
-    }
-    else{
-      this.snackbar.open('Invalid email or password', 'Close' , {duration:3000})
-    }
-    // snackbar is pop up msg -  which is enable for 3s.
-  }
-  register():any{
-    if(this.registerForm.valid){
-      console.log('Register : ',this.registerForm.value)
-      this.router.navigate(['/budget-planner/login'])
-    }
-    else{
-      this.snackbar.open('Please fill all fields correctly!' , 'Close',{duration:2000});
+
+  register(): any {
+    if (this.registerForm.valid) {
+      this.snackbar.open('Registration successful! Please login.', 'Close', {
+        duration: 3000,
+        panelClass: ['success-snackbar'],
+      });
+      this.toggleForm('login');
+    } else {
+      this.snackbar.open('Please fill all fields correctly!', 'Close', {
+        duration: 2000,
+        panelClass: ['error-snackbar'],
+      });
     }
   }
 }

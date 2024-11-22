@@ -7,59 +7,62 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-expense',
   standalone: true,
-  imports: [ReactiveFormsModule , CommonModule, MatOptionModule],
+  imports: [ReactiveFormsModule, CommonModule, MatOptionModule],
   templateUrl: './expense.component.html',
-  styleUrl: './expense.component.css'
+  styleUrl: './expense.component.css',
 })
 export class ExpenseComponent {
+  expenseForm: any;
+  selectedMonth: string;
 
-  expenseForm :any;
-  selectedMonth : string;
-
-  constructor(private fb : FormBuilder,
-    private router :Router){
+  constructor(private fb: FormBuilder, private router: Router) {
     const currentDate = new Date();
-    this.selectedMonth = currentDate.toLocaleString('default',{month : 'long'})
+    this.selectedMonth = currentDate.toLocaleString('default', {
+      month: 'long',
+    });
   }
-  expenses :{month:string , expenseAmount :number}[]=[
-    {month:'January', expenseAmount : 2200},
-    {month:'February', expenseAmount : 2300},
-    {month:'March', expenseAmount : 1800}
-  ]
-
-  monthSelected : boolean = false;
-  JanuaryExpense : any[] =[
-    {expenseType: 'Rent', expenseAmount : 11000},
-    {expenseType: 'Groceries', expenseAmount : 300}
-  ];
-  FebruaryExpense : any[] =[
-    {expenseType: 'Utility', expenseAmount : 11000},
-    {expenseType: 'Groceries', expenseAmount : 250}
-  ];
-  MarchExpense : any[] =[
-    {expenseType: 'Rent', expenseAmount : 11000},
-    {expenseType: 'Groceries', expenseAmount : 200},
+  expenses: { month: string; expenseAmount: number }[] = [
+    { month: 'January', expenseAmount: 2200 },
+    { month: 'February', expenseAmount: 2300 },
+    { month: 'March', expenseAmount: 1800 },
   ];
 
-  ngOnInit ():void{
+  monthSelected: boolean = false;
+  JanuaryExpense: any[] = [
+    { expenseType: 'Rent', expenseAmount: 11000 },
+    { expenseType: 'Groceries', expenseAmount: 300 },
+  ];
+  FebruaryExpense: any[] = [
+    { expenseType: 'Utility', expenseAmount: 11000 },
+    { expenseType: 'Groceries', expenseAmount: 250 },
+  ];
+  MarchExpense: any[] = [
+    { expenseType: 'Rent', expenseAmount: 11000 },
+    { expenseType: 'Groceries', expenseAmount: 200 },
+  ];
+
+  ngOnInit(): void {
     this.expenseForm = this.fb.group({
-      month :['',Validators.required],
-      expenseType : ['',Validators.required],
-      expenseAmount : ['', Validators.required],
-    })
+      month: ['', Validators.required],
+      expenseType: ['', Validators.required],
+      expenseAmount: ['', Validators.required],
+    });
   }
-  onSubmitExpense(){
-    if(this.expenseForm.valid){
+  onSubmitExpense() {
+    if (this.expenseForm.valid) {
       const newExpense = this.expenseForm.value;
       this.getFilteredExpense().push(newExpense);
       this.expenseForm.reset();
     }
   }
-  calculatetotalExpense(month:string):number{
-   return this.getFilteredExpense().reduce((acc,curr)=>acc+curr.expenseAmount,0)
+  calculatetotalExpense(month: string): number {
+    return this.getFilteredExpense().reduce(
+      (acc, curr) => acc + curr.expenseAmount,
+      0
+    );
   }
-  getExpenseForMonth(month: string):any[]{
-    switch(month){
+  getExpenseForMonth(month: string): any[] {
+    switch (month) {
       case 'January':
         return this.JanuaryExpense;
       case 'February':
@@ -70,40 +73,38 @@ export class ExpenseComponent {
         return [];
     }
   }
-  onChange(event:any){
+  onChange(event: any) {
     this.selectedMonth = event.target.value;
     this.monthSelected = true;
     this.getFilteredExpense();
   }
-  onChangeExpense(event:any){
+  onChangeExpense(event: any) {
     this.selectedMonth = event.target.value;
     this.monthSelected = true;
     this.getFilteredExpense();
   }
-  getFilteredExpense(){
-    switch(this.selectedMonth){
+  getFilteredExpense() {
+    switch (this.selectedMonth) {
       case 'January':
-       return this.JanuaryExpense;
+        return this.JanuaryExpense;
       case 'February':
         return this.FebruaryExpense;
-      case 'March' :
+      case 'March':
         return this.MarchExpense;
-      default :
+      default:
         return [];
     }
   }
-  onBack(){
-    this.router.navigate(["/budget-planner/dashboard"])
+  onBack() {
+    this.router.navigate(['/budget-planner/dashboard']);
   }
-  onSave(){
-    if(this.expenseForm.valid){
-      this.expenseForm.reset({month : this.selectedMonth});
+  onSave() {
+    if (this.expenseForm.valid) {
+      this.expenseForm.reset({ month: this.selectedMonth });
       this.getFilteredExpense();
     }
   }
-  saveForm(){
+  saveForm() {
     alert('Form saved!');
   }
 }
-
-
