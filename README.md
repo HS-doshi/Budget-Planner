@@ -2,26 +2,47 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.1.2.
 
-## Development server
+# Budget Planner
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+This is a feature-rich, role-based budget management application built with Angular. The app enables users to create, view, and manage monthly budgets effectively, showcasing best practices in Angular development.
 
-## Code scaffolding
+Live Demo: https://budget-planner-two-beta.vercel.app/budget-planner/dashboard
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+## Features
 
-## Build
+Monthly Budget Management: Add, view, edit, and delete budgets for each month.
+Role-Based Access: Provides restricted features based on user roles.
+Real-Time Updates: Dynamically updates budget details with instant reflections.
+Responsive Design: Fully optimized for both mobile and desktop devices.
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+## Prerequisites
+Ensure you have the following installed:
 
-## Running unit tests
+Node.js (LTS version recommended)
+Angular CLI version 17.1.2
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+## Installation
+1. Clone the Repository
+git clone <repository-url>
+cd budget-planner
 
-## Running end-to-end tests
+2. Install Dependencies
+npm install
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+3. Command Overview
+npm start
 
-## Further help
+### Notes
+This project highlights the following Angular concepts:
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+Lazy Loading for optimized performance.
+Role-Based Guards for secure access.
+Responsive UI using Angular Material and custom styles.
+
+### Deployment
+The app is hosted live at:
+https://budget-planner-two-beta.vercel.app/budget-planner
+
+For deploying the app to Vercel or similar platforms, follow the specific hosting service's instructions.
+Feel free to fork the repository or use this project for learning and experimentation. Contributions are welcome!
+Thank You!
